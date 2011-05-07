@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Map background-color="blue"
+     srs="&srs900913;"
+     maximum-extent="-20037508,-19929239,20037508,19929239"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <xi:include href="land.xml" />
+
+    <Datasource name="postgis">
+        <Parameter name="dbname">haiti</Parameter>
+        <Parameter name="estimate_extent">0</Parameter>
+        <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
+        <Parameter name="geometry_field">way</Parameter>
+        <Parameter name="srid">900913</Parameter>
+        <Parameter name="type">postgis</Parameter>
+        <Parameter name="user"/>
+    </Datasource>
+    
+    <xi:include href="streams_rivers.xml" />
+
+    <xi:include href="parks.xml" />
+
+    <xi:include href="streams_rivers.xml" />
+
+    <xi:include href="roads.xml" />
+
+    <xi:include href="lakes.xml" />
+
+</Map>

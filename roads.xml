@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <Style name="large-roads" filter-mode="first">
+        <Rule>
+            &maxscale_zoom12;
+            <LineSymbolizer stroke="black" stroke-width="1.5"/>
+        </Rule>
+        <Rule>
+            &maxscale_zoom9;
+            <Filter>[highway] = 'motorway'</Filter>
+            <LineSymbolizer stroke="black" stroke-width=".6"/>
+        </Rule>
+    </Style>
+
+    <Layer name="large-roads" srs="&srs900913;">
+        <StyleName>large-roads</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+                (Select way,highway from planet_osm_roads
+                    where highway in ('motorway','primary','primary_link','secondary','secondary_link') 
+                    order by z_order
+                ) as roads</Parameter>
+        </Datasource>
+    </Layer>
+
+    <Style name="other-roads" filter-mode="first">
+        <Rule>
+            &maxscale_zoom14;
+            <LineSymbolizer stroke="black" stroke-width=".7"/>
+        </Rule>
+    </Style>
+
+    <Layer name="other-roads" srs="&srs900913;">
+        <StyleName>other-roads</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+                (Select way from planet_osm_line
+                    where highway is not null and highway not in ('motorway','primary','primary_link','secondary','secondary_link') 
+                    order by z_order
+                ) as roads</Parameter>
+        </Datasource>
+    </Layer>
+
+    
+</Include>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <Style name="lakes">
+        <Rule>
+            <PolygonSymbolizer fill="blue"/>
+        </Rule>
+    </Style>
+
+    <Layer name="lakes" srs="&srs900913;">
+        <StyleName>lakes</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+
+              (select way,"natural",waterway,landuse
+                from planet_osm_polygon
+                where waterway in ('dock','mill_pond','riverbank','canal')
+                   or landuse in ('reservoir','water','basin')
+                   or "natural" in ('lake','water')
+                order by z_order,way_area desc
+                ) as water_areas
+
+            </Parameter>
+        </Datasource>
+    </Layer>
+    
+</Include>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+    <Style name="rivers">
+        <Rule>
+            &maxscale_zoom6;
+            <LineSymbolizer stroke="blue" stroke-width=".3"/>
+        </Rule>
+        <Rule>
+            &maxscale_zoom7;
+            <LineSymbolizer stroke="blue" stroke-width=".5"/>
+        </Rule>
+        <Rule>
+            &maxscale_zoom11;
+            <LineSymbolizer stroke="blue" stroke-width=".7"/>
+        </Rule>
+    </Style>
+
+    <Layer name="rivers" srs="&srs900913;">
+        <StyleName>rivers</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+              (select way from planet_osm_line
+              where waterway in ('river')
+                and (bridge is null or bridge not in ('yes','true','1','aqueduct'))
+              order by z_order
+              ) as water_lines
+            </Parameter>
+        </Datasource>
+    </Layer>
+
+    <Style name="streams">
+        <Rule>
+            &maxscale_zoom11;
+            <LineSymbolizer stroke="blue" stroke-width=".5"/>
+        </Rule>
+    </Style>
+
+    <Layer name="streams" srs="&srs900913;">
+        <StyleName>streams</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+              (select way from planet_osm_line
+              where waterway in ('stream')
+                and (bridge is null or bridge not in ('yes','true','1','aqueduct'))
+              order by z_order
+              ) as water_lines
+            </Parameter>
+        </Datasource>
+    </Layer>
+    
+</Include>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <Style name="world">
+        <Rule>
+          &maxscale_zoom0;
+          &minscale_zoom9;
+          <PolygonSymbolizer fill="red" gamma=".75"/>
+        </Rule>
+    </Style>
+
+    <Style name="coast-poly">
+        <Rule>
+          &maxscale_zoom10;
+          <PolygonSymbolizer fill="red" />
+        </Rule>
+    </Style>
+    
+    <Layer name="world" srs="&srs900913;">
+        <StyleName>world</StyleName>
+        <Datasource>
+          <Parameter name="type">shape</Parameter>
+          <Parameter name="file">&world_boundaries;/shoreline_300</Parameter>
+        </Datasource>
+    </Layer>
+
+    <Layer name="coast-poly" srs="&srs900913;">
+        <StyleName>coast-poly</StyleName>
+        <Datasource>
+          <Parameter name="type">shape</Parameter>
+          <Parameter name="file">&world_boundaries;/processed_p</Parameter>
+        </Datasource>
+    </Layer>
+    
+</Include>

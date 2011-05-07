@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "entities.xml.inc">
+%entities;
+]>
+
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+    <Style name="parks">
+        <Rule>
+            <PolygonSymbolizer fill="green"/>
+            <LineSymbolizer stroke-width="1" stroke="green"/>
+        </Rule>
+    </Style>
+
+    <Layer name="parks" srs="&srs900913;">
+        <StyleName>parks</StyleName>
+        <Datasource base="postgis">
+            <Parameter name="table">
+                (SELECT way FROM planet_osm_polygon 
+                    where leisure in 
+                        ('nature_reserve','playground','recreation_ground','park','garden')
+                    order by z_order
+                ) as parks
+            </Parameter>
+        </Datasource>
+    </Layer>
+
+    
+</Include>
