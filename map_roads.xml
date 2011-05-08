@@ -10,15 +10,7 @@
      xmlns:xi="http://www.w3.org/2001/XInclude"
 >
 
-    <Datasource name="postgis">
-        <Parameter name="dbname">haiti</Parameter>
-        <Parameter name="estimate_extent">0</Parameter>
-        <Parameter name="extent">-20037508,-19929239,20037508,19929239</Parameter>
-        <Parameter name="geometry_field">way</Parameter>
-        <Parameter name="srid">900913</Parameter>
-        <Parameter name="type">postgis</Parameter>
-        <Parameter name="user"/>
-    </Datasource>
+    &datasource;
     
     <xi:include href="roads.xml" />
 
